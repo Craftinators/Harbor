@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class Region implements Iterable<Vector3i> {
     private final Vector3i a, b;
 
-    public Region(Vector3i a, Vector3i b) {
+    public Region(@NotNull Vector3i a, @NotNull Vector3i b) {
         this.a = a;
         this.b = b;
     }
@@ -21,7 +21,7 @@ public class Region implements Iterable<Vector3i> {
      * The upper vector of the region.
      * @return The upper vector
      */
-    public Vector3i getMaximum() {
+    public @NotNull Vector3i getMaximum() {
         return a.max(b, new Vector3i());
     }
 
@@ -29,7 +29,7 @@ public class Region implements Iterable<Vector3i> {
      * The lower vector of the region.
      * @return The lower vector
      */
-    public Vector3i getMinimum() {
+    public @NotNull Vector3i getMinimum() {
         return a.min(b, new Vector3i());
     }
 
@@ -37,7 +37,7 @@ public class Region implements Iterable<Vector3i> {
      * The center vector of a region.
      * @return The center vector
      */
-    public Vector3d getCenter() {
+    public @NotNull Vector3d getCenter() {
         return new Vector3d(getMaximum().add(getMinimum())).div(2d);
     }
 
@@ -83,7 +83,7 @@ public class Region implements Iterable<Vector3i> {
         private final Region region;
         private final Vector3i pointer;
 
-        public RegionIterator(Region region) {
+        public RegionIterator(@NotNull Region region) {
             this.region = region;
             pointer = region.getMinimum();
         }
@@ -94,7 +94,7 @@ public class Region implements Iterable<Vector3i> {
         }
 
         @Override
-        public Vector3i next() {
+        public @NotNull Vector3i next() {
             Vector3i current = new Vector3i(pointer);
             forward();
             return current;
