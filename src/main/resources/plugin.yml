@@ -1,4 +1,4 @@
 name: HarborPlugin
-version: '${version}'
+version: "0.0.1"
 main: me.craftinators.harbor.HarborPlugin
 api-version: "1.20"
