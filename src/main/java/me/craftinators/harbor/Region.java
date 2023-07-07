@@ -87,12 +87,33 @@ public class Region implements Iterable<Vector3i> {
         return vectors;
     }
 
+    /**
+     * Represents a face of a cuboid region
+     */
     public enum Face {
+        /**
+         * Positive X
+         */
         RIGHT,
+        /**
+         * Negative X
+         */
         LEFT,
+        /**
+         * Positive Y
+         */
         NORTH,
+        /**
+         * Negative Y
+         */
         SOUTH,
+        /**
+         * Positive Z
+         */
         FRONT,
+        /**
+         * Negative Z
+         */
         BACK
     }
 
