@@ -109,11 +109,6 @@ public class Region implements Iterable<Vector3i> {
         };
     }
 
-    @Override
-    public @NotNull Iterator<Vector3i> iterator() {
-        return new RegionIterator(this);
-    }
-
     // Region Iterator
     private static class RegionIterator implements Iterator<Vector3i> {
         private final Region region;
@@ -144,5 +139,10 @@ public class Region implements Iterable<Vector3i> {
             if (++pointer.z <= region.getMaximum().z) return;
             pointer.x = Integer.MIN_VALUE; // Must be a better way of doing this!
         }
+    }
+
+    @Override
+    public @NotNull Iterator<Vector3i> iterator() {
+        return new RegionIterator(this);
     }
 }
