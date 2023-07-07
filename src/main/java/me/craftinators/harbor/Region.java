@@ -76,6 +76,11 @@ public class Region implements Iterable<Vector3i> {
         return getWidth() * getHeight() * getLength();
     }
 
+    /**
+     * Returns a list consisting of vectors of this region that match the given predicate.
+     * @param predicate a predicate to apply to each element to determine if it should be included
+     * @return a list consisting of the accepted vectors
+     */
     public List<Vector3i> filter(Predicate<? super Vector3i> predicate) {
         List<Vector3i> vectors = new ArrayList<>();
         for (Vector3i vector : this) if(predicate.test(vector)) vectors.add(vector);
