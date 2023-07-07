@@ -4,7 +4,10 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3d;
 import org.joml.Vector3i;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Represents a cubical shape.
@@ -73,6 +76,12 @@ public class Region implements Iterable<Vector3i> {
         return getWidth() * getHeight() * getLength();
     }
 
+    public List<Vector3i> filter(Predicate<? super Vector3i> predicate) {
+        List<Vector3i> vectors = new ArrayList<>();
+        for (Vector3i vector : this) if(predicate.test(vector)) vectors.add(vector);
+        return vectors;
+    }
+
     @Override
     public @NotNull Iterator<Vector3i> iterator() {
         return new RegionIterator(this);
@@ -106,7 +115,7 @@ public class Region implements Iterable<Vector3i> {
             if (++pointer.y <= region.getMaximum().y) return;
             pointer.y = region.getMinimum().y;
             if (++pointer.z <= region.getMaximum().z) return;
-            pointer.x = Integer.MIN_VALUE;
+            pointer.x = Integer.MIN_VALUE; // Must be a better way of doing this!
         }
     }
 }
