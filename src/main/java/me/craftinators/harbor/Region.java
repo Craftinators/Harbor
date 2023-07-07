@@ -87,6 +87,28 @@ public class Region implements Iterable<Vector3i> {
         return vectors;
     }
 
+    public enum Face {
+        RIGHT,
+        LEFT,
+        NORTH,
+        SOUTH,
+        FRONT,
+        BACK
+    }
+
+    /**
+     * Returns the area of a face. Note that opposite sides will have the same area.
+     * @param face the face to get the area of
+     * @return the area of the face
+     */
+    public int getArea(@NotNull Face face) {
+        return switch (face) {
+            case RIGHT: case LEFT: yield getHeight() * getLength();
+            case NORTH: case SOUTH: yield getWidth() * getLength();
+            case FRONT: case BACK: yield getWidth() * getHeight();
+        };
+    }
+
     @Override
     public @NotNull Iterator<Vector3i> iterator() {
         return new RegionIterator(this);
