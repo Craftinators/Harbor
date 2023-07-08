@@ -6,7 +6,7 @@ import org.joml.Vector3i;
 import java.util.List;
 import java.util.function.Predicate;
 
-public interface Region extends Iterable<Vector3i>, Cloneable {
+public interface Region<T extends Region<?>> extends Iterable<Vector3i>, Cloneable {
     /**
      * The upper vector of the region.
      * @return the upper vector
@@ -50,11 +50,18 @@ public interface Region extends Iterable<Vector3i>, Cloneable {
     int getVolume();
 
     /**
+     * Translates the region according to the specified translation
+     * @param translation the translation to apply to the region
+     * @return the region
+     */
+    T translate(Vector3i translation);
+
+    /**
      * Returns a list consisting of vectors of this region that match the given predicate.
      * @param predicate a predicate to apply to each element to determine if it should be included
      * @return a list consisting of the accepted vectors
      */
     List<Vector3i> filter(Predicate<? super Vector3i> predicate);
 
-    Region clone();
+    T clone();
 }

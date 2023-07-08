@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 /**
  * Represents a cubical shape.
  */
-public class CuboidRegion implements Region {
+public class CuboidRegion implements Region<CuboidRegion> {
     private final Vector3i a, b;
 
     public CuboidRegion(@NotNull Vector3i a, @NotNull Vector3i b) {
@@ -56,6 +56,13 @@ public class CuboidRegion implements Region {
     }
 
     @Override
+    public CuboidRegion translate(Vector3i translation) {
+        a.add(translation);
+        b.add(translation);
+        return this;
+    }
+
+    @Override
     public List<Vector3i> filter(Predicate<? super Vector3i> predicate) {
         List<Vector3i> vectors = new ArrayList<>();
         for (Vector3i vector : this) if(predicate.test(vector)) vectors.add(vector);
@@ -63,9 +70,9 @@ public class CuboidRegion implements Region {
     }
 
     @Override
-    public Region clone() {
+    public CuboidRegion clone() {
         try {
-            return (Region) super.clone();
+            return (CuboidRegion) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
