@@ -20,6 +20,15 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
         this.b = b;
     }
 
+    /**
+     * Creates a copy of the region provided.
+     * @param region the region to copy
+     */
+    public CuboidRegion(@NotNull CuboidRegion region) {
+        this.a = region.getPrimaryCorner();
+        this.b = region.getSecondaryCorner();
+    }
+
     @Override
     public @NotNull Vector3i getMaximum() {
         return a.max(b, new Vector3i());
@@ -56,6 +65,13 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
     }
 
     @Override
+    public List<Vector3i> filter(Predicate<? super Vector3i> predicate) {
+        List<Vector3i> vectors = new ArrayList<>();
+        for (Vector3i vector : this) if (predicate.test(vector)) vectors.add(vector);
+        return vectors;
+    }
+
+    @Override
     public CuboidRegion translate(Vector3i translation) {
         a.add(translation);
         b.add(translation);
@@ -63,10 +79,16 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
     }
 
     @Override
-    public List<Vector3i> filter(Predicate<? super Vector3i> predicate) {
-        List<Vector3i> vectors = new ArrayList<>();
-        for (Vector3i vector : this) if (predicate.test(vector)) vectors.add(vector);
-        return vectors;
+    public CuboidRegion translated(Vector3i translation) {
+        return new CuboidRegion(this).translate(translation);
+    }
+
+    public Vector3i getPrimaryCorner() {
+        return a;
+    }
+
+    public Vector3i getSecondaryCorner() {
+        return b;
     }
 
     /**

@@ -12,11 +12,18 @@ import java.util.function.Predicate;
 public interface Region extends Iterable<Vector3i> {
     abstract class AbstractRegion<T extends Region> implements Region {
         /**
-         * Translates the region according to the specified translation
+         * Translates the region according to the specified translation.
          * @param translation the translation to apply to the region
          * @return the region
          */
         public abstract T translate(Vector3i translation);
+
+        /**
+         * Returns a new region translated according to the specified translation.
+         * @param translation the translation to apply to the new region
+         * @return the region
+         */
+        public abstract T translated(Vector3i translation);
     }
 
     /**
