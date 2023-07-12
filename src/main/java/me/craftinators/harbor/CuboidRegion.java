@@ -1,13 +1,9 @@
 package me.craftinators.harbor;
 
 import org.jetbrains.annotations.NotNull;
-import org.joml.Vector3d;
 import org.joml.Vector3i;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Represents a cubical shape.
@@ -15,6 +11,11 @@ import java.util.function.Predicate;
 public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
     private final Vector3i a, b;
 
+    /**
+     * Creates a region with two corners.
+     * @param a the primary corner
+     * @param b the secondary corner
+     */
     public CuboidRegion(@NotNull Vector3i a, @NotNull Vector3i b) {
         this.a = a;
         this.b = b;
@@ -37,38 +38,6 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
     @Override
     public @NotNull Vector3i getMinimum() {
         return a.min(b, new Vector3i());
-    }
-
-    @Override
-    public @NotNull Vector3d getCenter() {
-        return new Vector3d(getMaximum().add(getMinimum())).div(2d);
-    }
-
-    @Override
-    public int getWidth() {
-        return getMaximum().x - getMinimum().x + 1;
-    }
-
-    @Override
-    public int getHeight() {
-        return getMaximum().y - getMinimum().y + 1;
-    }
-
-    @Override
-    public int getLength() {
-        return getMaximum().z - getMinimum().z + 1;
-    }
-
-    @Override
-    public int getVolume() {
-        return getWidth() * getHeight() * getLength();
-    }
-
-    @Override
-    public List<Vector3i> filter(Predicate<? super Vector3i> predicate) {
-        List<Vector3i> vectors = new ArrayList<>();
-        for (Vector3i vector : this) if (predicate.test(vector)) vectors.add(vector);
-        return vectors;
     }
 
     @Override
