@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3i;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents a cubical shape.
@@ -100,6 +101,17 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
             case EAST: case WEST: yield getLength() * getHeight();
             case TOP: case BOTTOM: yield getWidth() * getLength();
             case NORTH: case SOUTH: yield getWidth() * getHeight();
+        };
+    }
+
+    public List<Vector3i> getSide(Face face) {
+        return switch (face) {
+            case EAST -> filter(vector -> inFace(vector, Face.EAST));
+            case WEST -> filter(vector -> inFace(vector, Face.WEST));
+            case TOP -> filter(vector -> inFace(vector, Face.TOP));
+            case BOTTOM -> filter(vector -> inFace(vector, Face.BOTTOM));
+            case NORTH -> filter(vector -> inFace(vector, Face.NORTH));
+            case SOUTH -> filter(vector -> inFace(vector, Face.SOUTH));
         };
     }
 
