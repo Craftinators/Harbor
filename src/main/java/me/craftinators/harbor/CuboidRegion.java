@@ -67,27 +67,27 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
         /**
          * Positive X
          */
-        RIGHT,
+        EAST,
         /**
          * Negative X
          */
-        LEFT,
+        WEST,
         /**
          * Positive Y
          */
-        NORTH,
+        TOP,
         /**
          * Negative Y
          */
-        SOUTH,
-        /**
-         * Positive Z
-         */
-        FRONT,
+        BOTTOM,
         /**
          * Negative Z
          */
-        BACK
+        NORTH,
+        /**
+         * Positive Z
+         */
+        SOUTH
     }
 
     /**
@@ -95,11 +95,22 @@ public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
      * @param face the face to get the area of
      * @return the area of the face
      */
-    public int getArea(@NotNull Face face) {
+    public int getArea(Face face) {
         return switch (face) {
-            case RIGHT: case LEFT: yield getHeight() * getLength();
-            case NORTH: case SOUTH: yield getWidth() * getLength();
-            case FRONT: case BACK: yield getWidth() * getHeight();
+            case EAST: case WEST: yield getLength() * getHeight();
+            case TOP: case BOTTOM: yield getWidth() * getLength();
+            case NORTH: case SOUTH: yield getWidth() * getHeight();
+        };
+    }
+
+    public boolean inFace(Vector3i vector, Face face) {
+        return switch (face) {
+            case EAST -> vector.x == getMaximum().x;
+            case WEST -> vector.x == getMinimum().x;
+            case TOP -> vector.y == getMaximum().y;
+            case BOTTOM -> vector.y == getMinimum().y;
+            case NORTH -> vector.z == getMinimum().z;
+            case SOUTH -> vector.z == getMaximum().z;
         };
     }
 
