@@ -1,4 +1,4 @@
-package me.craftinators.harbor;
+package me.craftinators.harbor.regions;
 
 import org.joml.Vector3d;
 import org.joml.Vector3i;
