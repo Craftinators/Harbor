@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Represents a cubical shape.
  */
-public class CuboidRegion extends Region.AbstractRegion<CuboidRegion> {
+public class CuboidRegion extends AbstractRegion<CuboidRegion> {
     private final Vector3i a, b;
 
     /**
