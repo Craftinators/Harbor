@@ -22,15 +22,6 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
         this.b = b;
     }
 
-    /**
-     * Creates a copy of the region provided.
-     * @param region the region to copy
-     */
-    public CuboidRegion(@NotNull CuboidRegion region) {
-        this.a = region.getPrimaryCorner();
-        this.b = region.getSecondaryCorner();
-    }
-
     @Override
     public @NotNull Vector3i getMaximum() {
         return a.max(b, new Vector3i());
@@ -42,6 +33,11 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
     }
 
     @Override
+    public CuboidRegion copy() {
+        return new CuboidRegion(getPrimaryCorner(), getSecondaryCorner());
+    }
+
+    @Override
     public CuboidRegion translate(Vector3i translation) {
         a.add(translation);
         b.add(translation);
@@ -50,15 +46,23 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
 
     @Override
     public CuboidRegion translated(Vector3i translation) {
-        return new CuboidRegion(this).translate(translation);
+        return copy().translate(translation);
     }
 
+    /**
+     * Returns a copy of the primary corner
+     * @return the primary corner
+     */
     public Vector3i getPrimaryCorner() {
-        return a;
+        return new Vector3i(a);
     }
 
+    /**
+     * Returns a copy of the secondary corner
+     * @return the secondary corner
+     */
     public Vector3i getSecondaryCorner() {
-        return b;
+        return new Vector3i(b);
     }
 
     /**

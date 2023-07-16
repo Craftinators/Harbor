@@ -58,4 +58,10 @@ public interface Region extends Iterable<Vector3i> {
      * @return a list consisting of the accepted vectors
      */
     List<Vector3i> filter(Predicate<? super Vector3i> predicate);
+
+    /**
+     * Returns a copy of the region.
+     * @return the copy
+     */
+    Region copy();
 }
