@@ -108,6 +108,11 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
         };
     }
 
+    /**
+     * Gets all vectors contained in the specified face.
+     * @param face the face
+     * @return all vectors contained in the face
+     */
     public List<Vector3i> getSide(Face face) {
         return switch (face) {
             case EAST -> filter(vector -> inFace(vector, Face.EAST));
@@ -119,6 +124,12 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
         };
     }
 
+    /**
+     * Gets whether the provided vector is in the specified face.
+     * @param vector the vector
+     * @param face the face
+     * @return true if the provided vector is in the specified face
+     */
     public boolean inFace(Vector3i vector, Face face) {
         return switch (face) {
             case EAST -> vector.x == getMaximum().x;
