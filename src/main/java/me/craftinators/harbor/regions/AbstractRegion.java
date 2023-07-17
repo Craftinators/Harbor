@@ -7,20 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-abstract class AbstractRegion<T extends Region> implements Region {
+abstract class AbstractRegion implements Region {
     /**
      * Translates the region according to the specified translation.
      * @param translation the translation to apply to the region
      * @return the region
      */
-    public abstract T translate(Vector3i translation);
+    public abstract Region translate(Vector3i translation);
 
     /**
      * Returns a new region translated according to the specified translation.
      * @param translation the translation to apply to the new region
      * @return the region
      */
-    public abstract T translated(Vector3i translation);
+    public Region translated(Vector3i translation) {
+        return ((AbstractRegion) copy()).translate(translation);
+    }
 
     @Override
     public Vector3d getCenter() {

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Represents a cubical shape.
  */
-public class CuboidRegion extends AbstractRegion<CuboidRegion> {
+public class CuboidRegion extends AbstractRegion {
     private final Vector3i a, b;
 
     /**
@@ -45,8 +45,11 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
     }
 
     @Override
-    public CuboidRegion translated(Vector3i translation) {
-        return copy().translate(translation);
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || !getClass().equals(obj.getClass())) return false;
+        CuboidRegion other = (CuboidRegion) obj;
+        return getPrimaryCorner().equals(other.getPrimaryCorner()) && getSecondaryCorner().equals(other.getSecondaryCorner());
     }
 
     /**
@@ -142,11 +145,11 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
     }
 
     // Region Iterator
-    private static class RegionIterator implements Iterator<Vector3i> {
+    private static class CuboidRegionIterator implements Iterator<Vector3i> {
         private final CuboidRegion region;
         private final Vector3i pointer;
 
-        public RegionIterator(@NotNull CuboidRegion region) {
+        public CuboidRegionIterator(@NotNull CuboidRegion region) {
             this.region = region;
             pointer = region.getMinimum();
         }
@@ -163,6 +166,7 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
             return current;
         }
 
+        @SuppressWarnings("DuplicatedCode")
         private void forward() {
             if (++pointer.x <= region.getMaximum().x) return;
             pointer.x = region.getMinimum().x;
@@ -175,6 +179,6 @@ public class CuboidRegion extends AbstractRegion<CuboidRegion> {
 
     @Override
     public @NotNull Iterator<Vector3i> iterator() {
-        return new RegionIterator(this);
+        return new CuboidRegionIterator(this);
     }
 }
