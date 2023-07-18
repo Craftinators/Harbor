@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 /**
  * Represents a readonly view of a region
  */
-public interface Region extends Iterable<Vector3i>, Copyable {
+public interface Region extends Iterable<Vector3i> {
     /**
      * The upper vector of the region.
      * @return the upper vector
@@ -58,4 +58,6 @@ public interface Region extends Iterable<Vector3i>, Copyable {
      * @return a list consisting of the accepted vectors
      */
     List<Vector3i> filter(Predicate<? super Vector3i> predicate);
+
+    Region copy();
 }
