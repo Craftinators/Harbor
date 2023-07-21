@@ -1,3 +1,3 @@
 package me.craftinators.harbor.classes;
 
-public interface Class { }
+public interface Class {}
