@@ -6,7 +6,7 @@ import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 import me.libraryaddict.disguise.disguisetypes.watchers.LivingWatcher;
 
-// Spigot Wrapper
+// Bukkit Wrapper
 public abstract class AbstractClass<W extends LivingWatcher> implements Class {
     private final MobDisguise disguise;
     private final ImmutableList<Ability<?>> abilities;
