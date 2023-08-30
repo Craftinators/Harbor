@@ -19,9 +19,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
     compileOnly("com.comphenix.protocol:ProtocolLib:5.0.0")
-    compileOnlyApi("LibsDisguises:LibsDisguises:10.0.37") {
-        exclude("org.spigotmc", "spigot")
-    } // LibDisguises
+    compileOnlyApi("LibsDisguises:LibsDisguises:10.0.37") { exclude("org.spigotmc", "spigot") } // LibDisguises
 }
 
 tasks {
