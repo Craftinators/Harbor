@@ -1,5 +1,6 @@
 package me.craftinators.harbor;
 
+import com.google.common.collect.ImmutableSet;
 import org.bukkit.entity.Player;
 
 import static me.craftinators.harbor.MatchState.WAITING;
@@ -16,9 +17,13 @@ public class Match {
     }
 
     public boolean addPlayer(Player player) {
-        if (players.contains(player) || !state.isAcceptingPlayers()) return false;
+        if (players.contains(player)) return false;
+        if (!state.isAcceptingPlayers()) return false;
+        if (Matches.findMatchContainingPlayer(player).isPresent()) return false;
         return players.add(player); // Should always be true
     }
 
-
+    public final ImmutableSet<Player> getPlayers() {
+        return ImmutableSet.copyOf(players);
+    }
 }
