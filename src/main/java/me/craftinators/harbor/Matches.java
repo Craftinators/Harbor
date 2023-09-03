@@ -24,6 +24,11 @@ public final class Matches {
     // Utility Class
     private Matches() {}
 
+    /**
+     * Finds the match that contains the specified player. If the player isn't in any match, an empty optional is returned.
+     * @param player The specified player
+     * @return An optional containing the match with the player, or an empty optional if the player isn't in any match
+     */
     public static Optional<Match> findMatchContainingPlayer(Player player) {
         for (Match match : matches) {
             if (match.getPlayers().contains(player)) return Optional.of(match);
