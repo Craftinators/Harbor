@@ -11,7 +11,6 @@ import java.util.Optional;
 
 public class Match {
     private final HashSet<Player> players = new HashSet<>(MINIMUM_PLAYERS_REQUIRED);
-    private final HashSet<Player> spectators = new HashSet<>();
     private final HarborPlugin plugin;
     private MatchState state;
 
@@ -53,13 +52,5 @@ public class Match {
 
     public final ImmutableSet<Player> getPlayers() {
         return ImmutableSet.copyOf(players);
-    }
-
-    public final ImmutableSet<Player> getSpectators() {
-        return ImmutableSet.copyOf(spectators);
-    }
-
-    public final ImmutableSet<Player> getAll() {
-        return ImmutableSet.<Player>builder().addAll(players).addAll(spectators).build();
     }
 }
