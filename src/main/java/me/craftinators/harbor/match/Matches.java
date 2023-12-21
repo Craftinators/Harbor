@@ -1,4 +1,4 @@
-package me.craftinators.harbor;
+package me.craftinators.harbor.match;
 
 import org.bukkit.entity.Player;
 

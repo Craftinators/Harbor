@@ -1,6 +1,6 @@
 package me.craftinators.harbor.api;
 
-import me.craftinators.harbor.Match;
+import me.craftinators.harbor.match.Match;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;

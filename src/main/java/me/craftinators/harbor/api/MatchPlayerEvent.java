@@ -1,6 +1,6 @@
 package me.craftinators.harbor.api;
 
-import me.craftinators.harbor.Match;
+import me.craftinators.harbor.match.Match;
 import org.bukkit.entity.Player;
 
 public abstract class MatchPlayerEvent extends MatchEvent {

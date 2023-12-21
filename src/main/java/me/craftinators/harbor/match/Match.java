@@ -1,11 +1,12 @@
-package me.craftinators.harbor;
+package me.craftinators.harbor.match;
 
 import com.google.common.collect.ImmutableSet;
+import me.craftinators.harbor.HarborPlugin;
 import me.craftinators.harbor.api.*;
 import org.bukkit.entity.Player;
 
-import static me.craftinators.harbor.MatchState.*;
-import static me.craftinators.harbor.Matches.MINIMUM_PLAYERS_REQUIRED;
+import static me.craftinators.harbor.match.MatchState.*;
+import static me.craftinators.harbor.match.Matches.MINIMUM_PLAYERS_REQUIRED;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -42,7 +43,7 @@ public class Match {
             return MatchPlayerJoinResult.CANCELLED;
         }
 
-        if (size() >= MINIMUM_PLAYERS_REQUIRED && state == WAITING) start();
+        if (size() >= MINIMUM_PLAYERS_REQUIRED && state == WAITING) {} // TODO: Start the match
         return MatchPlayerJoinResult.SUCCESS;
     }
 
@@ -50,26 +51,6 @@ public class Match {
         players.remove(player);
         MatchPlayerLeaveEvent event = new MatchPlayerLeaveEvent(this, player, reason);
         plugin.getServer().getPluginManager().callEvent(event);
-    }
-
-    // Shouldn't be called outside of this class
-    private void start() {
-         state = STARTING;
-
-         MatchStartingEvent event = new MatchStartingEvent(this);
-         plugin.getServer().getPluginManager().callEvent(event);
-         if (event.isCancelled()) {
-             state = WAITING;
-             return;
-         }
-
-    }
-
-    public boolean cancel() {
-        if (state != STARTING) return false;
-
-
-        return true;
     }
 
     public final ImmutableSet<Player> getPlayers() {
