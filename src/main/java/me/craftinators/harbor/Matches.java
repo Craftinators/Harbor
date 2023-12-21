@@ -8,6 +8,8 @@ import java.util.Optional;
  * This class consists exclusively of static methods that operate on, or provide utilities for matches.
  */
 public final class Matches {
+    public static final int DEFAULT_COUNTDOWN_DURATION_IN_SECONDS = 20;
+
     /**
      * Maximum amount of matches that can exist at once.
      */

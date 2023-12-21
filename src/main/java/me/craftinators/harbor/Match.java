@@ -3,7 +3,7 @@ package me.craftinators.harbor;
 import com.google.common.collect.ImmutableSet;
 import org.bukkit.entity.Player;
 
-import static me.craftinators.harbor.MatchState.WAITING;
+import static me.craftinators.harbor.MatchState.*;
 import static me.craftinators.harbor.Matches.MINIMUM_PLAYERS_REQUIRED;
 
 import java.util.HashSet;
@@ -13,6 +13,7 @@ public class Match {
     private final HashSet<Player> players = new HashSet<>(MINIMUM_PLAYERS_REQUIRED);
     private final HarborPlugin plugin;
     private MatchState state;
+    private MatchCountdownRunnable countdownRunnable;
 
     Match(HarborPlugin plugin) {
         this.plugin = plugin;
@@ -41,6 +42,7 @@ public class Match {
             return MatchPlayerJoinResult.CANCELLED;
         }
 
+        if (size() >= MINIMUM_PLAYERS_REQUIRED && state == WAITING) start();
         return MatchPlayerJoinResult.SUCCESS;
     }
 
@@ -50,7 +52,35 @@ public class Match {
         plugin.getServer().getPluginManager().callEvent(event);
     }
 
+    // Shouldn't be called outside of this class
+    private void start() {
+         state = STARTING;
+
+         MatchStartingEvent event = new MatchStartingEvent(this);
+         plugin.getServer().getPluginManager().callEvent(event);
+         if (event.isCancelled()) {
+             state = WAITING;
+             return;
+         }
+
+    }
+
+    public boolean cancel() {
+        if (state != STARTING) return false;
+
+
+        return true;
+    }
+
     public final ImmutableSet<Player> getPlayers() {
         return ImmutableSet.copyOf(players);
+    }
+
+    /**
+     * Returns the amount of players in the match.
+     * @return The amount of players in the match
+     */
+    public final int size() {
+        return players.size();
     }
 }
