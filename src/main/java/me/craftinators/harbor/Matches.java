@@ -8,7 +8,10 @@ import java.util.Optional;
  * This class consists exclusively of static methods that operate on, or provide utilities for matches.
  */
 public final class Matches {
-    public static final int DEFAULT_COUNTDOWN_DURATION_IN_SECONDS = 20;
+    // Static class
+    private Matches() {}
+
+    public static final int DEFAULT_COUNTDOWN_DURATION_IN_SECONDS = 10;
 
     /**
      * Maximum amount of matches that can exist at once.
@@ -21,10 +24,7 @@ public final class Matches {
      */
     public static final int MINIMUM_PLAYERS_REQUIRED = 1;
 
-    private static Match[] matches = new Match[MAXIMUM_CONCURRENT_MATCHES];
-
-    // Utility Class
-    private Matches() {}
+    private static final Match[] matches = new Match[MAXIMUM_CONCURRENT_MATCHES];
 
     /**
      * Finds the match that contains the specified player. If the player isn't in any match, an empty optional is returned.

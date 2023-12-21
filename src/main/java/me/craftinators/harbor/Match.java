@@ -14,7 +14,6 @@ public class Match {
     private final HashSet<Player> players = new HashSet<>(MINIMUM_PLAYERS_REQUIRED);
     private final HarborPlugin plugin;
     private MatchState state;
-    private MatchCountdownRunnable countdownRunnable;
 
     Match(HarborPlugin plugin) {
         this.plugin = plugin;
