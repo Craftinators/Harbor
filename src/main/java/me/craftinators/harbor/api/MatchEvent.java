@@ -1,5 +1,6 @@
-package me.craftinators.harbor;
+package me.craftinators.harbor.api;
 
+import me.craftinators.harbor.Match;
 import org.bukkit.event.Event;
 
 public abstract class MatchEvent extends Event {
