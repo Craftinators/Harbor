@@ -4,14 +4,17 @@ import com.google.common.collect.ImmutableSet;
 import me.craftinators.harbor.HarborPlugin;
 import me.craftinators.harbor.api.*;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitTask;
 
 import static me.craftinators.harbor.match.MatchState.*;
 import static me.craftinators.harbor.match.Matches.MINIMUM_PLAYERS_REQUIRED;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 
 public class Match {
+    private final ArrayList<BukkitTask> ACTIVE_TASKS = new ArrayList<>();
     private final HashSet<Player> players = new HashSet<>(MINIMUM_PLAYERS_REQUIRED);
     private final HarborPlugin plugin;
     private MatchState state;
@@ -43,14 +46,19 @@ public class Match {
             return MatchPlayerJoinResult.CANCELLED;
         }
 
-        if (size() >= MINIMUM_PLAYERS_REQUIRED && state == WAITING) {} // TODO: Start the match
+        if (size() >= MINIMUM_PLAYERS_REQUIRED && state == WAITING) {} // TODO: Start countdown
+
         return MatchPlayerJoinResult.SUCCESS;
     }
 
     public void removePlayer(Player player, MatchPlayerLeaveReason reason) {
         players.remove(player);
+
         MatchPlayerLeaveEvent event = new MatchPlayerLeaveEvent(this, player, reason);
         plugin.getServer().getPluginManager().callEvent(event);
+
+        // Stop the countdown
+        if (size() < MINIMUM_PLAYERS_REQUIRED && state == STARTING) {} // TODO: Cancel countdown
     }
 
     public final ImmutableSet<Player> getPlayers() {

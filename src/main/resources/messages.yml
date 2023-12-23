@@ -1,0 +1,4 @@
+configuration:
+  invalid_path: "Configuration path \"<path>\" is invalid, failed to fetch configuration."
+  updated_option: "Configuration option \"<path>\" was added in \"<file>\" as it was not found."
+  save_error: "Failed to save \"<file>\"."
