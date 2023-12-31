@@ -11,7 +11,6 @@ import static me.craftinators.harbor.match.Matches.MINIMUM_PLAYERS_REQUIRED;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Optional;
 
 public class Match {
     private final ArrayList<BukkitTask> ACTIVE_TASKS = new ArrayList<>();
@@ -35,8 +34,7 @@ public class Match {
         if (!state.isAcceptingPlayers()) return MatchPlayerJoinResult.MATCH_NOT_ACCEPTING_PLAYERS;
 
         // At this point the player isn't in THIS match and the match IS accepting players
-        Optional<Match> optionalMatch = Matches.findMatchContainingPlayer(player);
-        optionalMatch.ifPresent(match -> match.removePlayer(player, MatchPlayerLeaveReason.TRANSFERRED)); // Remove the player from the match they're in
+        Matches.findMatchContainingPlayer(player).ifPresent(match -> match.removePlayer(player, MatchPlayerLeaveReason.TRANSFERRED));
         players.add(player);
 
         MatchPlayerJoinEvent event = new MatchPlayerJoinEvent(this, player);
