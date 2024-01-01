@@ -1,4 +1,4 @@
-package me.craftinators.harbor.api;
+package me.craftinators.harbor.events;
 
 import me.craftinators.harbor.match.Match;
 import org.bukkit.event.Event;

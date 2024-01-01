@@ -2,7 +2,7 @@ package me.craftinators.harbor.match;
 
 import com.google.common.collect.ImmutableSet;
 import me.craftinators.harbor.HarborPlugin;
-import me.craftinators.harbor.api.*;
+import me.craftinators.harbor.events.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
