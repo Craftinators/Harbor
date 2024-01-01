@@ -7,14 +7,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class MatchPlayerLeaveEvent extends MatchPlayerEvent {
     private static final HandlerList handlers = new HandlerList();
-    private final MatchPlayerLeaveReason reason;
+    private final Match.LeaveReason reason;
 
-    public MatchPlayerLeaveEvent(Match match, Player player, MatchPlayerLeaveReason reason) {
+    public MatchPlayerLeaveEvent(Match match, Player player, Match.LeaveReason reason) {
         super(match, player);
         this.reason = reason;
     }
 
-    public final MatchPlayerLeaveReason getReason() {
+    public final Match.LeaveReason getReason() {
         return reason;
     }
 
