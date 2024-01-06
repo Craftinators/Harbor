@@ -11,6 +11,13 @@ import static me.craftinators.harbor.match.Matches.MINIMUM_PLAYERS_REQUIRED;
 import java.util.HashSet;
 
 public class Match {
+    public enum JoinResult {
+        SUCCESS,
+        ALREADY_IN_MATCH,
+        MATCH_NOT_ACCEPTING_PLAYERS,
+        CANCELLED,
+    }
+
     private final HashSet<Player> players = new HashSet<>(MINIMUM_PLAYERS_REQUIRED);
     private final HarborPlugin plugin;
     private MatchState state;
@@ -31,7 +38,7 @@ public class Match {
         if (!state.isAcceptingPlayers()) return JoinResult.MATCH_NOT_ACCEPTING_PLAYERS;
 
         // At this point the player isn't in THIS match and the match IS accepting players
-        Matches.findMatchContainingPlayer(player).ifPresent(match -> match.removePlayer(player, LeaveReason.TRANSFERRED));
+        Matches.findMatchContainingPlayer(player).ifPresent(match -> match.removePlayer(player, MatchLeaveReason.TRANSFERRED));
         players.add(player);
 
         MatchPlayerJoinEvent event = new MatchPlayerJoinEvent(this, player);
@@ -46,7 +53,7 @@ public class Match {
         return JoinResult.SUCCESS;
     }
 
-    public void removePlayer(Player player, LeaveReason reason) {
+    public void removePlayer(Player player, MatchLeaveReason reason) {
         players.remove(player);
 
         MatchPlayerLeaveEvent event = new MatchPlayerLeaveEvent(this, player, reason);
@@ -66,17 +73,5 @@ public class Match {
      */
     public final int size() {
         return players.size();
-    }
-
-    public enum JoinResult {
-        SUCCESS,
-        ALREADY_IN_MATCH,
-        MATCH_NOT_ACCEPTING_PLAYERS,
-        CANCELLED,
-    }
-
-    public enum LeaveReason {
-        TRANSFERRED,
-        DISCONNECTED,
     }
 }
