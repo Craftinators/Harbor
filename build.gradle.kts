@@ -22,6 +22,7 @@ dependencies {
     compileOnlyApi("LibsDisguises:LibsDisguises:10.0.40") {
         exclude("org.spigotmc", "spigot")
     } // LibDisguises
+    compileOnly("com.mojang:authlib:1.6.25")
 }
 
 tasks {
