@@ -48,8 +48,6 @@ public class Match {
             return JoinResult.CANCELLED;
         }
 
-        if (size() >= MINIMUM_PLAYERS_REQUIRED && state == WAITING) {} // TODO: Start countdown
-
         return JoinResult.SUCCESS;
     }
 
@@ -58,9 +56,6 @@ public class Match {
 
         MatchPlayerLeaveEvent event = new MatchPlayerLeaveEvent(this, player, reason);
         plugin.getServer().getPluginManager().callEvent(event);
-
-        // Stop the countdown
-        if (size() < MINIMUM_PLAYERS_REQUIRED && state == STARTING) {} // TODO: Cancel countdown
     }
 
     public final ImmutableSet<Player> getPlayers() {
