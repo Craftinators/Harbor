@@ -13,16 +13,20 @@ import java.io.InputStreamReader;
 
 public final class ConfigurationManager {
     private final YamlConfiguration defaultMessagesConfiguration;
+    private final YamlConfiguration defaultAbilitiesConfiguration;
     private YamlConfiguration messagesConfiguration;
+    private YamlConfiguration abilitiesConfiguration;
     private final HarborPlugin plugin;
 
     public ConfigurationManager(final @NotNull HarborPlugin plugin) {
         this.plugin = plugin;
         defaultMessagesConfiguration = extractDefault("messages.yml");
+        defaultAbilitiesConfiguration = extractDefault("abilities.yml");
     }
 
     public void validateConfiguration() {
         messagesConfiguration = validateResource("messages.yml", defaultMessagesConfiguration);
+        abilitiesConfiguration = validateResource("abilities.yml", defaultAbilitiesConfiguration);
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -60,5 +64,9 @@ public final class ConfigurationManager {
 
     public @NotNull YamlConfiguration getMessagesConfiguration() {
         return messagesConfiguration == null ? defaultMessagesConfiguration : messagesConfiguration;
+    }
+
+    public @NotNull YamlConfiguration getAbilitiesConfiguration() {
+        return abilitiesConfiguration == null ? defaultAbilitiesConfiguration : abilitiesConfiguration;
     }
 }
