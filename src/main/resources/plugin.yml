@@ -2,3 +2,4 @@ name: HarborPlugin
 version: "0.0.1"
 main: me.craftinators.harbor.HarborPlugin
 api-version: "1.20"
+depend: [LibsDisguises]
