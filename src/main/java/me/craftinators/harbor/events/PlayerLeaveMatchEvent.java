@@ -2,26 +2,24 @@ package me.craftinators.harbor.events;
 
 import me.craftinators.harbor.match.Match;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
-public class MatchPlayerJoinEvent extends MatchPlayerEvent implements Cancellable {
+public class PlayerLeaveMatchEvent extends MatchPlayerEvent {
+    public enum LeaveReason {
+        DISCONNECTED,
+    }
+
     private static final HandlerList handlers = new HandlerList();
-    private boolean cancelled = false;
+    private final LeaveReason reason;
 
-    public MatchPlayerJoinEvent(Match match, Player player) {
+    public PlayerLeaveMatchEvent(Match match, Player player, LeaveReason reason) {
         super(match, player);
+        this.reason = reason;
     }
 
-    @Override
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        this.cancelled = cancel;
+    public final LeaveReason getReason() {
+        return reason;
     }
 
     @Override
