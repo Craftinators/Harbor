@@ -10,8 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Field;
 import java.util.UUID;
 
-public final class Base64Texture {
-    private Base64Texture() {}
+public final class Base64TextureUtil {
+    private Base64TextureUtil() {}
 
     public static @NotNull ItemStack getTexturedHeadFromBase64(final @NotNull String base64) {
         ItemStack playerHead = new ItemStack(Material.PLAYER_HEAD);
